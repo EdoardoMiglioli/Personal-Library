@@ -29,7 +29,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/post", (req, res) => {
-    res.render("post_edit_book");
+    res.render("post_book");
 });
 
 
