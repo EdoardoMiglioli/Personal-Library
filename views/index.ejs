@@ -1,3 +1,48 @@
 <%- include("header.ejs") %>
+<select id="selectFruit" name="fruits">
+    <option value="Newest to older">Newest to older</option>
+    <option value="Older to newest">Older to newest</option>
+    <option value="Better rating">Better rating</option>
+    <option value="Worst rating">Worst rating</option>
+    <option value="A-Z">A-Z</option>
+    <option value="Z-A">Z-A</option>
+</select>
+
+<main>
+    <% if(typeof books != 'undefined') {%>
+        <% for(i = 0; i < books.length; i++) {%>
+            <div class="card mb-3 mx-3">
+                <div class="row g-0">
+                  <div class="col-md-4">
+                    <img src="<%=  %>" class="img-fluid rounded-start" alt="<%=  %>">
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body">
+                      <h5 class="card-title"><%=  %></h5>
+                      <p class="card-text"><small>Rating: <%=  %>/10</small></p>
+                      <p class="card-text"><%=  %></p>
+                      <a class="btn btn-primary" href="/" role="button">Read review</a>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        <% } %>
+    <% } %>
+    <div class="card mb-3 mx-3">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img src="<%=  %>" class="img-fluid rounded-start" alt="<%=  %>">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title"><%=  %></h5>
+              <p class="card-text"><small>Rating: <%=  %>/10</small></p>
+              <p class="card-text"><%=  %></p>
+              <a class="btn btn-primary" href="/" role="button">Read review</a>
+            </div>
+          </div>
+        </div>
+      </div>
+</main>
 
 <%- include("footer.ejs") %>

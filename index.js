@@ -21,12 +21,16 @@ const db = new pg.Client({
     password: process.env.DB_PASSWORD,
     port: process.env.DB_PORT || 5432,
 });
-db.connect()
+db.connect();
 
 
 app.get("/", (req, res) => {
-    res.render("index")
-})
+    res.render("index");
+});
+
+app.get("/post", (req, res) => {
+    res.render("post_edit_book");
+});
 
 
 app.listen(port, () => {

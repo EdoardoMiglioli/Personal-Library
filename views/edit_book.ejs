@@ -1,0 +1,27 @@
+<%- include("header.ejs") %>
+<main>
+    <form class="book-form mb-3" action="/edit" method="post">
+        <label class="form-label">Book's title</label>
+        <input type="text" class="form-control" id="book-form-title" placeholder="Type book's name">
+      </div>
+
+      <select class="form-control" id="book-form-rating">
+        <option value="0">0</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+      </select>
+
+      <div class="mb-3">
+        <label class="form-label">Personal notes</label>
+        <textarea class="form-control" id="book-form-textera" placeholder="Type your personal notes if you have" rows="3"></textarea>
+    </form>
+</main>
+<%- include("footer.ejs") %>
