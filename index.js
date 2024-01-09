@@ -32,6 +32,10 @@ app.get("/post", (req, res) => {
     res.render("post_book");
 });
 
+app.get("/book/:id", (req, res) => {
+    res.render("book");
+});
+
 
 app.listen(port, () => {
     console.log(`App listening on port ${port}`)

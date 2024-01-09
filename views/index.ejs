@@ -1,5 +1,5 @@
 <%- include("header.ejs") %>
-<select id="selectFruit" name="fruits">
+<select id="filter" name="filter">
     <option value="Newest to older">Newest to older</option>
     <option value="Older to newest">Older to newest</option>
     <option value="Better rating">Better rating</option>
@@ -11,38 +11,51 @@
 <main>
     <% if(typeof books != 'undefined') {%>
         <% for(i = 0; i < books.length; i++) {%>
-            <div class="card mb-3 mx-3">
-                <div class="row g-0">
-                  <div class="col-md-4">
-                    <img src="<%=  %>" class="img-fluid rounded-start" alt="<%=  %>">
-                  </div>
-                  <div class="col-md-8">
-                    <div class="card-body">
-                      <h5 class="card-title"><%=  %></h5>
-                      <p class="card-text"><small>Rating: <%=  %>/10</small></p>
-                      <p class="card-text"><%=  %></p>
-                      <a class="btn btn-primary" href="/" role="button">Read review</a>
-                    </div>
+          <div class="book-card card mb-3 mx-3">
+              <div class="row g-0">
+                <div class="col-md-4">
+                  <img src="<%=  %>" class="img-fluid rounded-start" alt="<%=  %>">
+                </div>
+                <div class="col-md-8">
+                  <div class="card-body">
+                    <h5 class="card-title"><%=  %></h5>
+                    <p class="card-text"><small>Rating: <%=  %>/10</small></p>
+                    <p class="card-text"><%=  %></p>
+                    <a class="btn btn-primary" href="/book/<%= books[i].id %>" role="button">Read review</a>
                   </div>
                 </div>
-            </div>
+              </div>
+          </div>
         <% } %>
     <% } %>
-    <div class="card mb-3 mx-3">
+    <div class="card mb-3">
         <div class="row g-0">
-          <div class="col-md-4">
-            <img src="<%=  %>" class="img-fluid rounded-start" alt="<%=  %>">
+          <div class="col-4">
+            <img src="https://covers.openlibrary.org/b/id/240727-S.jpg<%=  %>" class="card-img img-fluid rounded-start w-100" alt="<%=  %>">
           </div>
-          <div class="col-md-8">
+          <div class="col-8">
             <div class="card-body">
-              <h5 class="card-title"><%=  %></h5>
-              <p class="card-text"><small>Rating: <%=  %>/10</small></p>
-              <p class="card-text"><%=  %></p>
+              <h3 class="card-title">Book title<%=  %></h3>
+              <p class="card-text"><small>Rating: 9<%=  %>/10</small></p>
+              <p class="card-text"><%=  %>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed mollis leo velit, sed pellentesque urna fermentum eget.</p>
               <a class="btn btn-primary" href="/" role="button">Read review</a>
             </div>
           </div>
         </div>
       </div>
 </main>
+
+<script>
+  let buttons = document.getElementsByClassName('my-button');
+
+  for (let i = 0; i < buttons.length; i++) {
+    console.log("I'm there, " +  buttons[i]);
+      buttons[i].addEventListener('click', function() {
+        console.log("listened");
+        this.classList.remove('btn', 'btn-primary');
+      });
+  }
+</script>
+
 
 <%- include("footer.ejs") %>

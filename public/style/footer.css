@@ -1,0 +1,22 @@
+
+footer {
+    border-top: 1px solid var(--title-color);
+    justify-content: space-evenly;
+    background-color: var(--bg-color);
+}
+
+.copyright {
+    color: var(--title-color) !important;
+    font-family: var(--font-family);
+}
+
+.nav-link {
+    display: inline;
+    color: var(--title-color) !important;
+    font-family: var(--font-family);
+    font-size: var(--text-font-size);
+}
+
+.nav-link:hover {
+    opacity: var(--hover-opacity);
+}

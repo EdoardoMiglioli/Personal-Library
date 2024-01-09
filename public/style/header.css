@@ -1,0 +1,36 @@
+
+#logo {
+    width: 80px;
+    height: 74px;
+}
+
+.navbar {
+    background-color: var(--bg-color) !important;
+}
+
+.nav-link {
+    display: inline;
+    color: var(--title-color) !important;
+    font-family: var(--font-family);
+    font-size: var(--text-font-size);
+}
+
+.nav-link:hover {
+    opacity: var(--hover-opacity);
+}
+
+.navbar-toggler {
+    background-color: var(--widget-color);
+    border-color: #fff;
+}
+
+.navbar-toggler:hover {
+    border: var(--widget-color) solid 2px;
+    background-color: #fff;
+}
+
+.navbar-toggler:focus {
+    outline: none;
+    box-shadow: none;
+}
+
