@@ -19,13 +19,19 @@
     opacity: var(--hover-opacity);
 }
 
+
+/*.navbar-toggler .navbar-toggler-icon {
+    width: 100%;
+    height: 100%;
+}*/
+
 .navbar-toggler {
     background-color: var(--widget-color);
     border-color: #fff;
 }
 
 .navbar-toggler:hover {
-    border: var(--widget-color) solid 2px;
+    border-color: var(--widget-color);
     background-color: #fff;
 }
 
@@ -33,4 +39,14 @@
     outline: none;
     box-shadow: none;
 }
+
+.navbar-toggler-icon {
+    background-image: var(--white-toggler-icon);
+}
+
+.navbar-toggler:hover > .navbar-toggler-icon{
+    background-image: var(--green-toggler-icon);
+
+}
+
 

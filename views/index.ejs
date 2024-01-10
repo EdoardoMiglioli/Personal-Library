@@ -45,17 +45,4 @@
       </div>
 </main>
 
-<script>
-  let buttons = document.getElementsByClassName('my-button');
-
-  for (let i = 0; i < buttons.length; i++) {
-    console.log("I'm there, " +  buttons[i]);
-      buttons[i].addEventListener('click', function() {
-        console.log("listened");
-        this.classList.remove('btn', 'btn-primary');
-      });
-  }
-</script>
-
-
 <%- include("footer.ejs") %>
