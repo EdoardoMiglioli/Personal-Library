@@ -1,26 +1,29 @@
 <%- include("header.ejs") %>
-<select id="filter" name="filter">
-    <option value="Newest to older">Newest to older</option>
-    <option value="Older to newest">Older to newest</option>
-    <option value="Better rating">Better rating</option>
-    <option value="Worst rating">Worst rating</option>
-    <option value="A-Z">A-Z</option>
-    <option value="Z-A">Z-A</option>
-</select>
+<form id="filterForm" action="/" method="GET">
+  <select id="filter" name="sort" onchange="submitForm(event)">
+      <option id="id-ASC" value="id ASC">Newest to older</option>
+      <option id="id-DESC" value="id DESC">Older to newest</option>
+      <option id="rating-DESC" value="rating DESC">Better rating</option>
+      <option id="rating-ASC" value="rating ASC">Worst rating</option>
+      <option id="title-ASC" value="title ASC">A-Z</option>
+      <option id="title-DESC" value="title DESC">Z-A</option>
+  </select>
+</form>
 
 <main>
     <% if(typeof books != 'undefined') {%>
         <% for(i = 0; i < books.length; i++) {%>
-          <div class="book-card card mb-3 mx-3">
+          <% let book = books[i] %>
+          <div class="book-card card mb-3">
               <div class="row g-0">
-                <div class="col-md-4">
-                  <img src="<%=  %>" class="img-fluid rounded-start" alt="<%=  %>">
+                <div class="col-4">
+                  <img src="<%= book.coverurl %>" class="card-img img-fluid rounded-start w-100" alt="<%= book.title %>">
                 </div>
-                <div class="col-md-8">
+                <div class="col-8">
                   <div class="card-body">
-                    <h5 class="card-title"><%=  %></h5>
-                    <p class="card-text"><small>Rating: <%=  %>/10</small></p>
-                    <p class="card-text"><%=  %></p>
+                    <h5 class="card-title"><%= book.title %></h5>
+                    <p class="card-text"><small>Rating: <%= book.rating %>/10</small></p>
+                    <p class="card-text"><%= book.personal_notes.substring(0, 120) %>...</p>
                     <a class="btn btn-primary" href="/book/<%= books[i].id %>" role="button">Read review</a>
                   </div>
                 </div>
@@ -28,21 +31,23 @@
           </div>
         <% } %>
     <% } %>
-    <div class="card mb-3">
-        <div class="row g-0">
-          <div class="col-4">
-            <img src="https://covers.openlibrary.org/b/id/240727-S.jpg<%=  %>" class="card-img img-fluid rounded-start w-100" alt="<%=  %>">
-          </div>
-          <div class="col-8">
-            <div class="card-body">
-              <h3 class="card-title">Book title<%=  %></h3>
-              <p class="card-text"><small>Rating: 9<%=  %>/10</small></p>
-              <p class="card-text"><%=  %>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed mollis leo velit, sed pellentesque urna fermentum eget.</p>
-              <a class="btn btn-primary" href="/" role="button">Read review</a>
-            </div>
-          </div>
-        </div>
-      </div>
 </main>
+<script>
+  let selectedOptionId = localStorage.getItem('selectedOptionId');
+  let selectedOption = document.getElementById(selectedOptionId);
+  if (selectedOption) {
+    console.log(selectedOption);
+    selectedOption.setAttribute("selected", true);
+  }
 
-<%- include("footer.ejs") %>
+  function submitForm(event) {
+    event.preventDefault();
+    let sortSelect = document.getElementById("filter");
+    let option = sortSelect.options[sortSelect.selectedIndex];
+
+    option.setAttribute("selected", true);
+    localStorage.setItem('selectedOptionId', option.id);
+    console.log(option);
+    document.getElementById("filterForm").submit();
+}
+</script>

@@ -2,10 +2,10 @@ import * as api from "./api.js";
 import bodyParser from "body-parser";
 import dotenv from 'dotenv';
 import express from "express";
-import * as functions from "./functions.js";
+import * as fn from "./functions.js";
 import pg from "pg";
 
-
+dotenv.config();
 const app = express();
 const port = 3000;
 
@@ -23,9 +23,13 @@ const db = new pg.Client({
 });
 db.connect();
 
-
-app.get("/", (req, res) => {
-    res.render("index");
+let defaultSort = "id ASC";
+app.get("/", async (req, res) => {
+    if (req.query.sort) {
+        defaultSort = req.query.sort;
+    }
+    var books = await fn.getBooks(req.query.sort || defaultSort);
+    res.render("index", {books: books});
 });
 
 app.get("/post", (req, res) => {
