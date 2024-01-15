@@ -41,6 +41,22 @@ app.get("/book/:id", (req, res) => {
 });
 
 
+app.post("/post", async (req, res) => {
+    let newBookTitle = req.body.title;
+    let newBookRating = parseInt(req.body.rating, 10);
+    let newBookISBN = req.body.isbn;
+    let newBookPersonalNotes = req.body.personalNotes;
+
+    let postResult = fn.postBook(newBookTitle, newBookRating, newBookISBN, newBookPersonalNotes);
+
+    if (postResult === 1) {
+        console.log("Error posting a new book");
+    }
+
+    res.redirect("/");
+});
+
+
 app.listen(port, () => {
     console.log(`App listening on port ${port}`)
 });
