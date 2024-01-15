@@ -23,7 +23,11 @@
                   <div class="card-body">
                     <h5 class="card-title"><%= book.title %></h5>
                     <p class="card-text"><small>Rating: <%= book.rating %>/10</small></p>
-                    <p class="card-text"><%= book.personal_notes.substring(0, 120) %>...</p>
+                    <% if (typeof book.personal_notes !== 'undefined' && book.personal_notes !== null) { %>
+                      <p class="card-text"><%= book.personal_notes.substring(0, 120) %>...</p>
+                    <% } else { %>
+                      <p class="card-text">...</p>
+                    <% } %>                  
                     <a class="btn btn-primary" href="/book/<%= books[i].id %>" role="button">Read review</a>
                   </div>
                 </div>

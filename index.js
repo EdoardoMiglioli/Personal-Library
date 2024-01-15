@@ -36,8 +36,18 @@ app.get("/post", (req, res) => {
     res.render("post_book");
 });
 
-app.get("/book/:id", (req, res) => {
-    res.render("book");
+app.get("/book/:id", async (req, res) => {
+    let bookId = req.params.id;
+    let book = await fn.getBookById(bookId);
+
+    res.render("book", {book: book});
+});
+
+app.get("/edit/:id", async (req, res) => {
+    let bookId = req.params.id;
+    let book = await fn.getBookById(bookId);
+
+    res.render("edit_book", {book: book});
 });
 
 
@@ -54,6 +64,31 @@ app.post("/post", async (req, res) => {
     }
 
     res.redirect("/");
+});
+
+app.post("/edit/:id", async (req, res) => {
+    let bookId = req.params.id;
+    let bookTitle = req.body.title;
+    let bookRating = parseInt(req.body.rating, 10);
+    let bookCoverURL = req.body.coverurl;
+    let bookISBN = req.body.isbn;
+    let bookPersonalNotes = req.body.personalNotes;
+
+    let book = {
+        id: bookId,
+        title: bookTitle,
+        isbn: bookISBN,
+        rating: bookRating,
+        personal_notes: bookPersonalNotes,
+    }
+
+    let editResult = await fn.editBook(book);
+
+    if (editResult === 1) {
+        console.log("Error editing the book");
+    }
+
+    res.redirect(`/book/${bookId}`);
 });
 
 

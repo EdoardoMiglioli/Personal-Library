@@ -1,15 +1,15 @@
 <%- include("header.ejs") %>
 <main>
-    <form class="book-form mb-3" action="/edit" method="post">
+    <form class="book-form mb-3" action="/edit/<%= book.id %>" method="post">
       <div class="mb-3">
         <label class="form-label">Book's title</label>
-        <input type="text" name="title" class="form-control" id="book-form-title" placeholder="Type book's name">
+        <input type="text" name="title" class="form-control" id="book-form-title" value="<%= book.title %>" placeholder="Type book's name">
       </div>
 
       <br>
 
       <label class="form-label">Rate the book</label>
-      <select name="rating" class="form-control" id="book-form-rating">
+      <select name="rating" id="form-control" id="book-form-rating">
         <option value="0">0</option>
         <option value="1">1</option>
         <option value="2">2</option>
@@ -27,15 +27,26 @@
 
       <div class="mb-3">
         <label class="form-label">ISBN</label>
-        <input type="text" name="isbn" class="form-control" id="book-form-isbn" placeholder="Type book's isbn">
+        <input type="text" name="isbn" class="form-control" id="book-form-isbn" value="<%= book.isbn %>" placeholder="Type book's isbn">
       </div>
 
       <div class="mb-3">
         <label class="form-label">Personal notes</label>
-        <textarea name="personalNotes" class="form-control" id="book-form-textera" placeholder="Type your personal notes if you have" rows="3"></textarea>
+        <textarea name="personalNotes" class="form-control" id="book-form-textera" placeholder="Type your personal notes if you have" rows="3"><%= book.personal_notes %></textarea>
       </div>
 
       <button class="btn" type="submit">Submit</button>
     </form>
 </main>
+
+<script>
+  let bookRating = "<%= book.rating %>";
+  let selectRating = document.getElementById("form-control");
+
+  for (let i = 0; i < selectRating.length; i++) {
+    if (selectRating[i].value === bookRating) {
+      selectRating[i].setAttribute("selected", true);
+    }
+  }
+</script>
 <%- include("footer.ejs") %>

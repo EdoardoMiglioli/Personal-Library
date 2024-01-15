@@ -17,6 +17,12 @@ export async function getCoverURL(isbn) {
     return `https://covers.openlibrary.org/b/isbn/${isbn}-S.jpg`
 }
 
+export async function getBookById(id) {
+    const result = await db.query("SELECT * FROM public.books WHERE id = $1",
+    [id]);
+    return result.rows[0];
+}
+
 
 // DB
 export async function getBooks(sort) {
@@ -31,12 +37,26 @@ export async function postBook(title, rating, isbn, personalNotes) {
         let coverURL = await getCoverURL(isbn);
         console.log(typeof coverURL);
         console.log(coverURL);
-        const result = await db.query(`INSERT INTO public.books(title, coverurl, rating, personal_notes) VALUES($1, $2, $3, $4)
-        `, [title, coverURL, rating, personalNotes]);
+        const result = await db.query(`INSERT INTO public.books(title, coverurl, isbn, rating, personal_notes) VALUES($1, $2, $3, $4, $5)
+        `, [title, coverURL, isbn, rating, personalNotes]);
         
         return 0
     } catch (err) {
         console.error(err);
         return 1;
     }
+}
+
+export async function editBook(book) {
+    try{
+        let coverURL = await getCoverURL(book.isbn);
+        const result = await db.query(`UPDATE public.books SET title = $1, coverurl = $2, isbn = $3, rating = $4, personal_notes = $5 WHERE id = $6`,
+        [book.title, coverURL, book.isbn, book.rating, book.personal_notes, book.id]);
+
+        return 0
+    } catch(err) {
+        console.error(err);
+        return 1;
+    }
+
 }
