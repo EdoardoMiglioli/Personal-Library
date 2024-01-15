@@ -49,6 +49,11 @@ export async function postBook(title, rating, isbn, personalNotes) {
 
 export async function editBook(book) {
     try{
+        if (isNaN(book.rating)) {
+            book.rating = 0;
+        }
+        console.log(book.rating);
+        //console.log(typeof book.rating);
         let coverURL = await getCoverURL(book.isbn);
         const result = await db.query(`UPDATE public.books SET title = $1, coverurl = $2, isbn = $3, rating = $4, personal_notes = $5 WHERE id = $6`,
         [book.title, coverURL, book.isbn, book.rating, book.personal_notes, book.id]);
@@ -59,4 +64,16 @@ export async function editBook(book) {
         return 1;
     }
 
+}
+
+export async function deleteBook(id) {
+    try { 
+        const result = await db.query(`DELETE FROM public.books WHERE id = $1`,
+        [id]);
+
+        return 0;
+    } catch(err) {
+        console.error(err);
+        return 1;
+    }
 }

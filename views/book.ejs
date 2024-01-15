@@ -12,10 +12,10 @@
         </div>
     </div>
     <div class="edit-delete-forms">
-        <form class="edit-button-form" action="/edit/<%= book.id %>">
+        <form class="edit-button-form" action="/edit/<%= book.id %>" method="get">
             <button class="btn edit-button">Edit</button>
         </form>
-        <form class="delete-button-form" action="/delete/<%= book.id %>">
+        <form class="delete-button-form" action="/delete/<%= book.id %>" method="post">
             <button class="btn deletw-button">Delete</button>
         </form>
     </div>

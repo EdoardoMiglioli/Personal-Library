@@ -91,6 +91,17 @@ app.post("/edit/:id", async (req, res) => {
     res.redirect(`/book/${bookId}`);
 });
 
+app.post("/delete/:id", async (req, res) => {
+    let bookId = req.params.id;
+    let deleteResult = await fn.deleteBook(bookId);
+
+    if (deleteResult === 1) {
+        console.log("Error editing the book");
+    }
+
+    res.redirect("/");
+});
+
 
 app.listen(port, () => {
     console.log(`App listening on port ${port}`)
